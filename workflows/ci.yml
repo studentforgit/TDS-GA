@@ -27,3 +27,7 @@ jobs:
       name: 21f3001993@ds.study.iitm.ac.in
       run: 
         echo "Hello, world!"
+      
+      name: test
+      run: |
+        echo "Hello, world!"
