@@ -3,7 +3,7 @@ name: Scrape IMDb Top 250
 on:
   schedule:
     
-    - cron: "0 5 * * *"
+    - cron: "37 4 * * *"
   workflow_dispatch: # Allow manual triggers
 
 jobs:
