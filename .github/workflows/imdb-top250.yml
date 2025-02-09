@@ -6,7 +6,7 @@ on:
       - main
   schedule:
     - cron: "*/5 * * * *" # every 5 minutes
-  
+  workflow_dispatch: # Allow manual triggers
 
 jobs:
   scrape-imdb:
@@ -15,8 +15,24 @@ jobs:
       contents: write
 
     steps:
-      - name: Running 21f3001993@ds.study.iitm.ac.in
-        run: echo "Running!"
-
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install httpx lxml
+
+      - name: Run scraper
+        run: python scrape.py
+
+      - name: Commit and push if changed
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "github-actions@github.com"
+          git add imdb-top250-*.json
+          git diff --quiet && git diff --staged --quiet || git commit -m "Updated IMDb Top 250"
+          git push
