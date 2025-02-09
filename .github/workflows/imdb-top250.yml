@@ -6,7 +6,7 @@ on:
       - main
   schedule:
     - cron: "*/5 * * * *" # every 5 minutes
-  workflow_dispatch: # Allow manual triggers
+  
 
 jobs:
   scrape-imdb:
